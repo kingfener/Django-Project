@@ -1,0 +1,73 @@
+**Django comes with a utility that automatically generates
+the basic directory structure of an app, so you can focus on writing code
+rather than creating directories.
+
+1,     installing django
+2,    django-admin startproject kinglite
+3,    python manage.py runserver #ip.port,eg8000   (stop by :ctr+ break)
+4,    python  manage.py startapp polls
+5,create a view     ##  write view.py in polls and config the urls.py . and add urlConfig in project's urls.py
+6,    python manage.py migrate
+7,    create models
+8,    activate models : installed _apps : polls.apps.PollsConfig
+9,     python manage.py makemigrations polls
+10    python manage.py migrate
+but for now, remember the three-step guide to making model changes:
+
+* Change your models (in ``models.py``).
+* Run :djadmin:`python manage.py makemigrations <makemigrations>` to create
+  migrations for those changes
+* Run :djadmin:`python manage.py migrate <migrate>` to apply those changes to
+  the database.
+Playing with the API
+11    python manage.py createsuperuser
+king,sys-day-，1347840731@qq.com
+12        python manage.py runserver
+(if forget the superuser's password, use:python manage.py changepassword user'name)
+13    polls/admin.py 
+from .models import Question,Choice
+admin.site.register(Question)
+admin.site.register(Choice)
+14    reload 127.0.0.1/admin   and king,password login;
+15    create view.py  and config urls.py and raise 404 error by:::from django.shortcuts import get_object_or_404, render
+16    create  K:\djangopro\kinglite\polls\templates\polls   and write template for each html that need templates render
+17    add app_name = 'polls' in poll's urls.py
+18    Namespacing URL names   {% url 'polls:detail' question.id %}
+19    amend the code include detail and vote so that we can count the vote result;
+20    use generic Views of django to simplyse the code .
+21    (tutoriels 5) test our application :polls；write code in tests.py to run test## python manage.py test polls.
+    >>>>>>Django test client
+22     (For full details on testing, see :doc:`Testing in Django</topics/testing/index>`.)
+test:you can use an "in-browser"framework such as Selenium_ to test the way your HTML actually renders in a
+browser.These tools allow you to check not just the behavior of your Django
+code, but also, for example, of your JavaScript. It's quite something to see
+the tests launch a browser, and start interacting with your site, as if a human
+being were driving it! 
+Django includes :class:`~django.test.LiveServerTestCase`
+to facilitate integration with tools like Selenium.
+
+23    static file:css
+
+These are the **basics**. For more details on settings and other bits included
+with the framework see
+:doc:`the static files howto </howto/static-files/index>` and
+:doc:`the staticfiles reference </ref/contrib/staticfiles>`. :doc:`Deploying
+static files </howto/static-files/deployment>` discusses how to use static
+files on a real server.
+24    admin amend
+25    admin templates amend
+
+---20160408--king's first web APP ；polls finieshed initially.
+
+
+
+
+
+
+
+
+
+
+以上使用 SQLite数据库引擎，直接本地调用数据。
+若使用服务器如， Apache,需要使用django的 wsgi 模块。
+具体参考：   D:\Python_related\Django-1.9.5\docs\howto\deployment\wsgi   \modwsgi.txt
